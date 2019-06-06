@@ -1,0 +1,13 @@
+# external libries
+node_modules/*
+build/*
+contracts/*
+
+# log files
+*.log
+
+# temp files
+.node*
+
+# api keys and secrets that the world shall never know!
+.env
