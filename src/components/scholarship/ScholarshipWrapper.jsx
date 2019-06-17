@@ -1,7 +1,8 @@
+// Libraries
 import React from "react"
 import { drizzleReactHooks } from "drizzle-react"
-import Scholarship from "@src/components/scholarship/Scholarship.jsx"
-import withDrizzle from "@src/hoc/withDrizzle.jsx"
+// Source Files
+import Scholarship from "@src/components/scholarship/Scholarship"
 
 const ScholarshipWrapper = ({ contractAddress }) => {
   const { useCacheCall } = drizzleReactHooks.useDrizzle()
@@ -13,7 +14,7 @@ const ScholarshipWrapper = ({ contractAddress }) => {
     }, {})
   )
   return <Scholarship
-            contractData={useCacheCall([contractAddress], callFunction)}
+            contractData={useCacheCall([ contractAddress ], callFunction)}
             contractProperties={contractProperties} />
 }
 

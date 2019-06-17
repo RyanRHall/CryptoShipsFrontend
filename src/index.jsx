@@ -1,11 +1,10 @@
 // Libraries
-import React from "react";
-import ReactDOM from "react-dom";
-import { Drizzle, generateStore } from "drizzle";
-import { drizzleReactHooks } from "drizzle-react";
-// Components
-import App from "@src/components/App.jsx";
-// Contracts
+import React from "react"
+import ReactDOM from "react-dom"
+import { Drizzle, generateStore } from "drizzle"
+import { drizzleReactHooks } from "drizzle-react"
+// Source Files
+import App from "@src/components/App"
 import ScholarshipManager from "@root/build/contracts/ScholarshipManager.json"
 
 // configure drizzle
@@ -14,9 +13,10 @@ const drizzleOptions = {
     ScholarshipManager
   ]
 }
-const drizzleStore = generateStore(drizzleOptions);
-const drizzle = new Drizzle(drizzleOptions, drizzleStore);
+const drizzleStore = generateStore(drizzleOptions)
+const drizzle = new Drizzle(drizzleOptions, drizzleStore)
 
+// wrap app in providers
 const wrappedApp = (
     <drizzleReactHooks.DrizzleProvider drizzle={drizzle}>
       <drizzleReactHooks.Initializer
@@ -30,8 +30,9 @@ const wrappedApp = (
         <App />
       </drizzleReactHooks.Initializer>
     </drizzleReactHooks.DrizzleProvider>
-);
+)
 
+// doc ready callback
 document.addEventListener("DOMContentLoaded", function() {
-  ReactDOM.render(wrappedApp, document.getElementById("root"));
-});
+  ReactDOM.render(wrappedApp, document.getElementById("root"))
+})

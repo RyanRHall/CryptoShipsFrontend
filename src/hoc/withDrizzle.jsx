@@ -1,17 +1,9 @@
-import React from "react";
-import { DrizzleContext, drizzleReactHooks } from "drizzle-react";
-// TODO choose one method!
-
-// const withDrizzle = Component => props => (
-//   <DrizzleContext.Consumer>
-//     { drizzleContext => <Component {...props} drizzleContext={drizzleContext} /> }
-//   </DrizzleContext.Consumer>
-// )
-
+import React from "react"
+import { DrizzleContext, drizzleReactHooks } from "drizzle-react"
 
 const withDrizzle = Component => props => {
-  const { drizzle } = drizzleReactHooks.useDrizzle();
+  const { drizzle } = drizzleReactHooks.useDrizzle()
   return <Component {...props} drizzle={drizzle} />
 }
 
-export default withDrizzle;
+export default withDrizzle

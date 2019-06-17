@@ -1,5 +1,5 @@
 // Libraries
-import React from "react";
+import React from "react"
 
 const Scholarship = props => (
   <ul>
@@ -13,4 +13,4 @@ const Scholarship = props => (
   </ul>
 )
 
-export default Scholarship;
+export default Scholarship
