@@ -2,32 +2,31 @@
 import React from "react"
 import { drizzleReactHooks } from "drizzle-react"
 
+const CONTRACT_PROPERTIES = [ "courseName", "isActive", "schoolName", "sponsor" ]
+
 // Component
 const Scholarship = props => (
   <ul>
     {
-      props.contractProperties
-      .filter(property => props.contractData[property] !== undefined)
-      .map(property => (
-        <li key={property}>{`${property}: ${props.contractData[property]}`}</li>
-      ))
+      CONTRACT_PROPERTIES
+        .filter(property => props[property] !== undefined)
+        .map(property => (
+          <li key={property}>{`${property}: ${props[property]}`}</li>
+        ))
     }
   </ul>
 )
 
 // Wrapper
-const ScholarshipWrapper = ({ contractAddress }) => {
+const ScholarshipWrapper = ({ contractName }) => {
   const { useCacheCall } = drizzleReactHooks.useDrizzle()
-  const contractProperties = [ "courseName", "isActive", "schoolName", "sponsor" ]
-  const callFunction = call => (
-    contractProperties.reduce((data, property) => {
-      data[property] = call(contractAddress, property)
-      return data
-    }, {})
-  )
-  return <Scholarship
-            contractData={useCacheCall([ contractAddress ], callFunction)}
-            contractProperties={contractProperties} />
+
+  const cacheCallProps = CONTRACT_PROPERTIES.reduce((props, property) => {
+    props[property] = useCacheCall(contractName, property)
+    return props
+  }, {})
+
+  return <Scholarship {...cacheCallProps} />
 }
 
 export default ScholarshipWrapper
