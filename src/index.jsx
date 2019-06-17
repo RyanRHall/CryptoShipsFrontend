@@ -2,7 +2,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Drizzle, generateStore } from "drizzle";
-import { DrizzleContext } from "drizzle-react";
+import { DrizzleContext, drizzleReactHooks } from "drizzle-react";
 // Components
 import App from "@src/components/App.jsx";
 // Contracts
@@ -17,10 +17,24 @@ const drizzleOptions = {
 const drizzleStore = generateStore(drizzleOptions);
 const drizzle = new Drizzle(drizzleOptions, drizzleStore);
 
+// <DrizzleContext.Provider drizzle={drizzle}>
+// </DrizzleContext.Provider>
+
+
+
 const wrappedApp = (
-  <DrizzleContext.Provider drizzle={drizzle}>
-    <App />
-  </DrizzleContext.Provider>
+    <drizzleReactHooks.DrizzleProvider drizzle={drizzle}>
+      <drizzleReactHooks.Initializer
+        // Optional `node` to render on errors. Defaults to `'Error.'`.
+        error="There was an error."
+        // Optional `node` to render while loading contracts and accounts. Defaults to `'Loading contracts and accounts.'`.
+        loadingContractsAndAccounts="Also still loading."
+        // Optional `node` to render while loading `web3`. Defaults to `'Loading web3.'`.
+        loadingWeb3="Still loading."
+      >
+        <App />
+      </drizzleReactHooks.Initializer>
+    </drizzleReactHooks.DrizzleProvider>
 );
 
 document.addEventListener("DOMContentLoaded", function() {

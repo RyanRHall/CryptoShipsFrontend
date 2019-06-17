@@ -25,8 +25,10 @@ class App extends React.Component {
   }
 
   render() {
-    const { drizzleContext: { initialized } } = this.props;
-    return initialized ? this._renderLoaded() : "Loading...";
+    // const { initialized } = this.props.drizzle.store.getState().drizzleStatus;
+    // const { drizzleContext: { initialized } } = this.props;
+    // return initialized ? this._renderLoaded() : "Loading...";
+    return this._renderLoaded();
   }
 }
 
