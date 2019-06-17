@@ -2,7 +2,7 @@
 import React from "react"
 // Source Files
 import style from "./app.scss"
-import ScholarshipListWrapper from "./scholarship_list/ScholarshipListWrapper"
+import ScholarshipList from "./scholarship_list/ScholarshipList"
 import withDrizzle from "../hoc/withDrizzle"
 import { abi as scholarshipABI } from "@root/build/contracts/Scholarship.json"
 import { contractUtil } from "@src/utils"
@@ -35,7 +35,7 @@ class App extends React.Component {
   }
 
   render() {
-    return <ScholarshipListWrapper />
+    return <ScholarshipList />
   }
 }
 
