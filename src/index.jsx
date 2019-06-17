@@ -2,7 +2,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Drizzle, generateStore } from "drizzle";
-import { DrizzleContext, drizzleReactHooks } from "drizzle-react";
+import { drizzleReactHooks } from "drizzle-react";
 // Components
 import App from "@src/components/App.jsx";
 // Contracts
@@ -16,11 +16,6 @@ const drizzleOptions = {
 }
 const drizzleStore = generateStore(drizzleOptions);
 const drizzle = new Drizzle(drizzleOptions, drizzleStore);
-
-// <DrizzleContext.Provider drizzle={drizzle}>
-// </DrizzleContext.Provider>
-
-
 
 const wrappedApp = (
     <drizzleReactHooks.DrizzleProvider drizzle={drizzle}>

@@ -1,34 +1,38 @@
 import React from "react";
-import { DrizzleContext } from "drizzle-react";
 import style from "./app.scss";
-import ScholarshipList from "./scholarship_list/ScholarshipList.jsx";
+import ScholarshipListWrapper from "./scholarship_list/ScholarshipListWrapper.jsx";
 import withDrizzle from "../hoc/withDrizzle.jsx";
-import Web3_1x from "web3";
-import { Web3_1xContext } from "@src/hoc/withWeb3_1x.jsx";
-
-
+import { abi as scholarshipABI } from "@root/build/contracts/Scholarship.json";
 
 class App extends React.Component {
 
   constructor(props) {
     super(props);
+    this._fetchScholarshipContracts()
   }
 
-  _renderLoaded() {
-    // setup web3_1x - api expected by Drizzle
-    const web3_1x = new Web3_1x(web3.currentProvider);
-    return(
-      <Web3_1xContext.Provider value={web3_1x}>
-        <ScholarshipList />
-      </Web3_1xContext.Provider>
-    );
+  async _fetchScholarshipContracts() {
+    const { drizzle } = this.props;
+    const contract = drizzle.contracts.ScholarshipManager;
+    const scholarshipAddresses = await contract.methods.getScholarshipAddresses().call();
+    scholarshipAddresses.forEach(address => this._addScholarship(address));
+  }
+
+  _addScholarship(contractAddress) {
+    const { drizzle } = this.props;
+    window.drizzle = drizzle;
+    // create new web3 Contract instance
+    const web3Contract = new drizzle.web3.eth.Contract(scholarshipABI, contractAddress);
+    // add conrtact to drizzle store
+    const contractConfig = {
+      contractName: contractAddress,
+      web3Contract
+    };
+    drizzle.addContract(contractConfig);
   }
 
   render() {
-    // const { initialized } = this.props.drizzle.store.getState().drizzleStatus;
-    // const { drizzleContext: { initialized } } = this.props;
-    // return initialized ? this._renderLoaded() : "Loading...";
-    return this._renderLoaded();
+    return <ScholarshipListWrapper />
   }
 }
 
