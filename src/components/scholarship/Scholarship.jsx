@@ -5,7 +5,7 @@ const Scholarship = props => (
   <ul>
     {
       props.contractProperties
-      .filter(property => props.contractData[property])
+      .filter(property => props.contractData[property] !== undefined)
       .map(property => (
         <li key={property}>{`${property}: ${props.contractData[property]}`}</li>
       ))
