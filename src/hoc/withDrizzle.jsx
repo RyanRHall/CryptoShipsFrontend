@@ -1,5 +1,5 @@
 import React from "react"
-import { DrizzleContext, drizzleReactHooks } from "drizzle-react"
+import { drizzleReactHooks } from "drizzle-react"
 
 const withDrizzle = Component => props => {
   const { drizzle } = drizzleReactHooks.useDrizzle()

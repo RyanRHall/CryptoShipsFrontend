@@ -7,3 +7,7 @@ export const scholarshipContractNames = state => (
 export const scholarshipContracts = state => (
   scholarshipContractNames(state).map(name => state.contracts[name])
 )
+
+export const drizzleStatus = state => (
+  state.drizzleStatus.initialized
+)
