@@ -6,7 +6,7 @@ import classNames from "classnames"
 // Source
 import generateContainer from "@src/hoc/generateContainer"
 // Style
-import "./scholarship_list_item_style"
+import "@src/styles/scholarship_list/scholarship_list_item"
 
 const CONTRACT_PROPERTIES = [ "courseName", "isActive", "schoolName", "sponsor", "value" ]
 

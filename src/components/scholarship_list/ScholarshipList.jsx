@@ -5,7 +5,7 @@ import { drizzleReactHooks } from "drizzle-react"
 import ScholarshipListItem from "./ScholarshipListItem"
 import * as select from "@src/state/selectors"
 // Style
-import "./scholarship_list_style"
+import "@src/styles/scholarship_list/scholarship_list"
 
 // Styles
 const ScholarshipListContainer = props => (

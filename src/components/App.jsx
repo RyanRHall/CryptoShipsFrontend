@@ -10,7 +10,7 @@ import * as select from "@src/state/selectors"
 import ScholarshipList from "./scholarship_list/ScholarshipList"
 import Scholarship from "./scholarship/Scholarship"
 // Style
-import "./app_style"
+import "@src/styles/app"
 
 class App extends React.Component {
 
