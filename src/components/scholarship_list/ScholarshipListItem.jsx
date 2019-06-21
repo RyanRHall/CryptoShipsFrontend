@@ -3,24 +3,19 @@ import React from "react"
 import { drizzleReactHooks } from "drizzle-react"
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 // Source Files
-import ApplyButton from "@src/components/scholarship/ApplyButton"
+import { ScholarshipContainer } from "./styles"
 
-const CONTRACT_PROPERTIES = [ "courseName", "isActive", "schoolName", "sponsor" ]
+const CONTRACT_PROPERTIES = [ "courseName", "isActive", "schoolName", "sponsor", "value" ]
 
 // Component
 const Scholarship = props => (
   <Link to={`/scholarships/${props.index}`}>
-    <div>
-      <ul>
-        {
-          CONTRACT_PROPERTIES
-            .filter(property => props[property] !== undefined)
-            .map(property => (
-              <li key={property}>{`${property}: ${props[property]}`}</li>
-            ))
-        }
-      </ul>
-    </div>
+    <ScholarshipContainer>
+      <h4>{props.courseName}</h4>
+      <h5>{props.schoolName}</h5>
+      <span>{props.sponsor}</span>
+      <span>{props.value} wei</span>
+    </ScholarshipContainer>
   </Link>
 )
 
