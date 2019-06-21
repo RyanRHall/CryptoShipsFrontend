@@ -19,7 +19,7 @@ const drizzle = new Drizzle(drizzleOptions, drizzleStore)
 // wrap app in providers
 const wrappedApp = (
   <drizzleReactHooks.DrizzleProvider drizzle={drizzle}>
-      <App />
+    <App />
   </drizzleReactHooks.DrizzleProvider>
 )
 

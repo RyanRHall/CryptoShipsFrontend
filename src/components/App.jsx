@@ -1,9 +1,11 @@
 // Libraries
 import React from "react"
 import { drizzleReactHooks } from "drizzle-react"
+import { BrowserRouter as Router, Route, Link } from "react-router-dom"
 // Source Files
 import style from "./app.scss"
 import ScholarshipList from "./scholarship_list/ScholarshipList"
+import Scholarship from "./scholarship/Scholarship"
 import withDrizzle from "../hoc/withDrizzle"
 import { abi as scholarshipABI } from "@root/build/contracts/Scholarship.json"
 import { contractUtil } from "@src/utils"
@@ -43,7 +45,12 @@ class App extends React.Component {
   }
 
   _renderLoaded() {
-    return <ScholarshipList />
+    return(
+      <Router>
+        <Route exact path="/" component={ScholarshipList} />
+        <Route path="/scholarships/:index" component={Scholarship} />
+      </Router>
+    )
   }
 
   render() {

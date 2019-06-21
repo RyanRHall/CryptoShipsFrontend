@@ -2,12 +2,12 @@
 import React from "react"
 import { drizzleReactHooks } from "drizzle-react"
 // Source Files
-import Scholarship from "@src/components/scholarship/Scholarship"
+import ScholarshipListItem from "./ScholarshipListItem"
 import * as select from "@src/state/selectors"
 
 // Component
 const ScholarshipList = props => (
-  props.scholarshipAddresses.map(name => <Scholarship key={name} contractName={name} />)
+  props.scholarshipAddresses.map((name, index) => <ScholarshipListItem key={name} contractName={name} index={index}/>)
 )
 
 // Wrapper
