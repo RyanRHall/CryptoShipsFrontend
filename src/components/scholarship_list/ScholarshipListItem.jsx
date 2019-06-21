@@ -1,22 +1,30 @@
 // Libraries
 import React from "react"
 import { drizzleReactHooks } from "drizzle-react"
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-// Source Files
-import { ScholarshipContainer } from "./styles"
+import { BrowserRouter as Router, Route, Link } from "react-router-dom"
+import classNames from "classnames"
+// Source
+import generateContainer from "@src/hoc/generateContainer"
+// Style
+import "./scholarship_list_item_style"
 
 const CONTRACT_PROPERTIES = [ "courseName", "isActive", "schoolName", "sponsor", "value" ]
 
+// Container
+const ComponentContainer = generateContainer(props => ({
+  className: classNames("scholarship-list-item-container", { active: props.isActive })
+}))
+
 // Component
-const Scholarship = props => (
-  <Link to={`/scholarships/${props.index}`}>
-    <ScholarshipContainer>
+const ScholarshipListItem = props => (
+  <ComponentContainer>
+    <Link to={`/scholarships/${props.index}`}>
       <h4>{props.courseName}</h4>
       <h5>{props.schoolName}</h5>
       <span>{props.sponsor}</span>
       <span>{props.value} wei</span>
-    </ScholarshipContainer>
-  </Link>
+    </Link>
+  </ComponentContainer>
 )
 
 // Wrapper
@@ -27,7 +35,7 @@ const ScholarshipWrapper = props => {
     return contractProperties
   }, {})
 
-  return <Scholarship {...cacheCallProps} {...props} />
+  return <ScholarshipListItem {...cacheCallProps} {...props} />
 }
 
 export default ScholarshipWrapper

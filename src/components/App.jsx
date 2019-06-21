@@ -3,13 +3,14 @@ import React from "react"
 import { drizzleReactHooks } from "drizzle-react"
 import { BrowserRouter as Router, Route, Link } from "react-router-dom"
 // Source Files
-import style from "./app.scss"
-import ScholarshipList from "./scholarship_list/ScholarshipList"
-import Scholarship from "./scholarship/Scholarship"
-import withDrizzle from "../hoc/withDrizzle"
 import { abi as scholarshipABI } from "@root/build/contracts/Scholarship.json"
 import { contractUtil } from "@src/utils"
 import * as select from "@src/state/selectors"
+// Components
+import ScholarshipList from "./scholarship_list/ScholarshipList"
+import Scholarship from "./scholarship/Scholarship"
+// Style
+import "./app_style"
 
 class App extends React.Component {
 
@@ -57,7 +58,6 @@ class App extends React.Component {
     return this.props.initialized ? this._renderLoaded() : this._renderLoading()
   }
 }
-
 
 const AppWrapper = props => {
   const initialized = drizzleReactHooks.useDrizzleState(select.drizzleStatus)

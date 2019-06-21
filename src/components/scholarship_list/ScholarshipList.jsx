@@ -4,10 +4,21 @@ import { drizzleReactHooks } from "drizzle-react"
 // Source Files
 import ScholarshipListItem from "./ScholarshipListItem"
 import * as select from "@src/state/selectors"
+// Style
+import "./scholarship_list_style"
+
+// Styles
+const ScholarshipListContainer = props => (
+  <div className="scholarship-list-container">
+    {props.children}
+  </div>
+)
 
 // Component
 const ScholarshipList = props => (
-  props.scholarshipAddresses.map((name, index) => <ScholarshipListItem key={name} contractName={name} index={index}/>)
+  <ScholarshipListContainer>
+    {props.scholarshipAddresses.map((name, index) => <ScholarshipListItem key={name} contractName={name} index={index}/>)}
+  </ScholarshipListContainer>
 )
 
 // Wrapper
