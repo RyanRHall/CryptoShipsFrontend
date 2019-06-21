@@ -11,8 +11,15 @@ import * as select from "@src/state/selectors"
 
 class App extends React.Component {
 
-  componentDidUpdate() {
+  async componentDidUpdate() {
+    await this._setDefaultAccount()
     this._fetchScholarshipContracts()
+  }
+
+  async _setDefaultAccount() {
+    const { drizzle } = this.props
+    const accounts = await drizzle.web3.eth.getAccounts()
+    drizzle.web3.eth.defaultAccount = accounts[0]
   }
 
   async _fetchScholarshipContracts() {
@@ -25,6 +32,7 @@ class App extends React.Component {
     const { drizzle } = this.props
     // create new web3 Contract instance
     const web3Contract = new drizzle.web3.eth.Contract(scholarshipABI, address)
+    web3Contract.options.from = drizzle.web3.eth.defaultAccount
     // add conrtact to drizzle store
     const contractName = contractUtil.generateName({ contractName: "Scholarship", address })
     drizzle.addContract({ contractName, web3Contract })
@@ -43,52 +51,10 @@ class App extends React.Component {
   }
 }
 
-// export default withDrizzle(App)
-
-// const App = async ({ drizzle }) => {
-//
-//   const _addScholarshipToDrizzle = address => {
-//     // create new web3 Contract instance
-//     const web3Contract = new drizzle.web3.eth.Contract(scholarshipABI, address)
-//     // add conrtact to drizzle store
-//     const contractConfig = {
-//       contractName: contractUtil.generateName({ contractName: "Scholarship", address }),
-//       web3Contract
-//     }
-//     drizzle.addContract(contractConfig)
-//   }
-//
-//   // fetch scholarship addresses from ScholarshipManager
-//   const contract = drizzle.contracts.ScholarshipManager
-//   const scholarshipAddresses = await contract.methods.getScholarshipAddresses().call()
-//   scholarshipAddresses.forEach(_addScholarshipToDrizzle)
-//
-//   // render
-//   return <ScholarshipList />
-// }
-
-// const _renderLoading = () => {
-//   return "loading..."
-// }
-//
-// const _renderLoaded = () => {
-//   const scholarshipAddresses = useCacheCall("ScholarshipManager", "getScholarshipAddresses")
-//   return <ScholarshipList scholarshipAddresses={scholarshipAddresses} />
-//
-//   // return "not loading..."
-//   // return <ScholarshipList />
-// }
-//
-// const App = props => {
-//
-//   return props.initialized ? _renderLoaded() : _renderLoading()
-// }
 
 const AppWrapper = props => {
   const initialized = drizzleReactHooks.useDrizzleState(select.drizzleStatus)
   const { drizzle } = drizzleReactHooks.useDrizzle()
-  // const scholarshipAddresses = useCacheCall("ScholarshipManager", "getScholarshipAddresses")
-  // return <App initialized={initialized} scholarshipAddresses={scholarshipAddresses} />
   return <App initialized={initialized} drizzle={drizzle} />
 }
 

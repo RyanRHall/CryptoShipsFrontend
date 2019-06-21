@@ -1,5 +1,9 @@
 import { contractUtil } from "@src/utils"
 
+export const contractByName = name => state => (
+  state.contracts[name]
+)
+
 export const scholarshipContractNames = state => (
   Object.keys(state.contracts).filter(name => contractUtil.parseName(name).contractName === "Scholarship")
 )
